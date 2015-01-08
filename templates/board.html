@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="am-u-sm-10 am-u-sm-centered">
+  <br>
+  <form class="am-form am-form-horizontal">
+    <div class="am-form-group">
+      <label for="user-intro" class="am-u-sm-3 am-form-label">留言 / Message boards</label>
+        <div class="am-u-sm-9">
+          <textarea class="am-form-field" rows="5" id="user-intro" placeholder="留下你想说的话"></textarea>
+            <small>写出你的感想...</small>
+        </div>
+    </div>
+
+    <div class="am-form-group">
+      <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
+      <div class="am-u-sm-9">
+        <input type="text" id="user-name" placeholder="可以匿名的哦" maxlength="10">
+        <small>输入你的名字，让我们记住你。</small>
+      </div>
+    </div>
+
+
+    <div class="am-form-group">
+      <div class="am-u-sm-9 am-u-sm-push-3">
+        <button type="button" class="am-btn am-btn-primary">发送</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <div class="am-u-sm-10 am-u-sm-centered">
+    <ul class="am-comments-list">
+      {% for msg in msglist[(id-1)*10:id*10] %}
+      <li class="am-comment">
+          <img src="" alt="头像" class="am-comment-avatar" width="50" height="50">
+        <div class="am-comment-main">
+          <header class="am-comment-hd">
+            <div class="am-comment-meta">
+              {{ msg["name"] }} 评论于 {{ msg["time"] }}
+            </div>
+          </header>
+          <div class="am-comment-bd">
+            <p>{{ msg["content"] }}</p>
+          </div>
+        </div>
+      </li>
+      {% end %}
+
+    <ul data-am-widget="pagination" class="am-pagination am-pagination-select">
+  <li class="am-pagination-prev ">
+    <a href="/board/{{ id-1 }}" id="prvpage">上一页</a>
+  </li>
+  <li class="am-pagination-select">
+    <select id="pagination">
+      {% for i in range(len(msglist)/10+1) %}
+      <option value="/board/{{ i+1 }}" class="">{{ i+1 }} / {{ len(msglist)/10+1 }}</option>
+      {% end %}
+    </select>
+  </li>
+  <li class="am-pagination-next ">
+    <a href="/board/{{ id+1 }}" id="nextpage">下一页</a>
+  </li>
+</ul>
+  </div>
+
+
+  <script type="text/javascript">
+
+  //获取当前时间
+  function getFormatTime()
+  {
+    function addzero(t){return t<10?'0'+t:t;};
+    var time = new Date();
+    var y = time.getFullYear();
+    var m = time.getMonth()+1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+'-'+m+'-'+d+' '+addzero(h)+':'+addzero(mm)+':'+addzero(s);
+  }
+
+  //表单验证
+  $("#user-intro").bind("change", function() {
+      var parent = $("div.am-u-sm-9:nth-child(2)")
+      if ($("#user-intro").val()) {
+        parent.removeClass("am-form-error");
+        parent.addClass("am-form-success");
+      }
+      else {
+        parent.removeClass("am-form-success");
+        parent.addClass("am-form-error");
+      }
+    })
+
+  //在页面顶部弹出提示
+  function alertmsg(msg) {
+    $(".am-comments-list").prepend("<div class='am-alert' data-am-alert><button type='button' class='am-close'>&times;</button><p>"+ msg +"</p></div>");
+    $('.am-alert').sticky({top: 65});
+    setTimeout("$('.am-alert').remove();", 2000);
+  }
+
+  //向服务器post
+  $(".am-btn.am-btn-primary").bind("click", function () {
+    if ($("#user-intro").val().length > 250) {
+      alertmsg("留言不能超过250字哦");
+    }
+    else if ($("#user-intro").val()) {
+        var btn = $(this)
+        btn.button('loading');
+        if (!$("#user-name").val()) {
+                names = ["盖伦","易大师","提莫","安妮","阿利斯塔","崔斯特","潘森","古拉加斯","奈德丽","伊泽瑞尔","奥拉夫","伊芙琳","金克丝","卡萨丁","基兰","阿木木","赵信","李青","路人甲","路人已","路人丙","路人丁"];
+                var name = names[Math.floor(Math.random() * 22)];
+        } else {
+          var name = $("#user-name").val();
+        }
+        $.post("/board", {name:name,content: $("#user-intro").val(),time:getFormatTime()},
+            function (data) {
+            if (data == "成功提交!!") {
+              $(".am-comments-list").prepend("<li class='am-comment'><img src='/static/i/avatar/7.jpg' alt='头像' class='am-comment-avatar' width='50' height='50'><div class='am-comment-main'><header class='am-comment-hd'><div class='am-comment-meta'>" + name +" 评论于 " + getFormatTime() + "</div></header><div class='am-comment-bd'><p>"+$("#user-intro").val()+"</p></div></div></li>");
+              $("#user-intro").val("");
+            }
+            alertmsg(data);
+            
+            setTimeout(function(){btn.button('reset');},2500);
+          });
+      } else {
+        alertmsg("请输入后再提交..");
+      }
+    })
+  
+
+  $(document).ready(function(){
+    //设置随机头像
+    for (var i = 0; i < $(".am-comment-avatar").length; i++) {
+      $($(".am-comment-avatar")[i]).attr("src","/static/i/avatar/"+String(Math.floor(Math.random() * 17))+".jpg");
+    }
+    //选中当前页面
+    $("#pagination").val("/board/{{ id }}");
+
+    //选中后跳转
+    $("#pagination").change(
+      function(){
+        window.location.href=$(this).children('option:selected').val();
+    });
+
+    //隐藏头尾导航
+    if ($("#nextpage").attr("href") == "/board/"+{{ len(msglist)/10+2 }}) {
+      $("#nextpage").hide();
+    }
+    if ($("#prvpage").attr("href") == "/board/0") {
+      $("#prvpage").hide();
+    }
+
+  });
+
+
+
+  </script>
+{% end %}

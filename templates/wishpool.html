@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+
+  <table class="am-table">
+    <thead>
+      <tr><th>愿望列表</th><th style="width:90px">状态</th></tr>
+    </thead>
+    <tbody>
+      {% for wish in wishlist_need %}
+      <tr class="am-secondary">
+      <td><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"][:14]+"....." if len(wish["wish"]) > 14 else wish["wish"] }}</a></td>
+      <td><span class="am-badge am-badge-secondary am-round">求实现</span></td>
+      </tr>
+      {% end %}
+      {% for wish in wishlist_ing %}
+      <tr class="am-primary">
+      <td><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"][:14]+"....." if len(wish["wish"]) > 14 else wish["wish"] }}</a></td>
+      <td><span class="am-badge am-badge-primary am-round">正在进行</span></td>
+      </tr>
+      {% end %}
+      {% for wish in wishlist_finish %}
+      <tr class="am-success">
+      <td><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"][:14]+"....." if len(wish["wish"]) > 14 else wish["wish"] }}</a></td>
+      <td><span class="am-badge am-badge-success am-round">已完成</span></td>
+      </tr>
+      {% end %}
+    </tbody>
+  </table>
+
+{% end %}

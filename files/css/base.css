@@ -1,0 +1,42 @@
+.get {
+  background: #1E5B94;
+  color: #fff;
+  text-align: center;
+  padding: 100px 0;
+}
+.get-title {
+  font-size: 200%;
+  border: 2px solid #fff;
+  padding: 20px;
+  display: inline-block;
+}
+.detail-h2 {
+  text-align: center;
+  font-size: 150%;
+  margin: 40px 0;
+}
+.hope {
+  background: #0bb59b;
+  padding: 50px 0;
+}
+.hope-img {
+  text-align: center;
+}
+.hope-hr {
+  border-color: #149C88;
+}
+.hope-title {
+  font-size: 140%;
+}
+
+.footer p {
+  color: #7f8c8d;
+  margin: 0;
+  padding: 15px 0;
+  text-align: center;
+  background: #2d3e50;
+}
+.hellomsg {
+  text-align: center;
+  line-height: 50px;
+}

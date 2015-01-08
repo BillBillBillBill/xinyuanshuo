@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="get">
+  <div class="am-g">
+    <div class="am-u-lg-12">
+      <h1 class="get-title">心愿说</h1>
+      <p>
+         湖水是你的眼神，梦想是满天星辰。
+      </p>
+    </div>
+  </div>
+</div>
+
+  <div class="am-g am-container">
+    <div class="am-u-lg-12">
+      <h2 class="detail-h2">My Dream，期待和你一起去实现!</h2>
+    </div>
+  </div>
+
+<div class="hope">
+  <div class="am-g am-container">
+    <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
+      <img src="{{ static_url("i/examples/landing.png") }}" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+      <img src="{{ static_url("i/examples/landing2.png") }}" alt="" data-am-scrollspy="{animation:'slide-right', repeat: false}">
+      <hr class="am-article-divider am-show-sm-only hope-hr">
+    </div>
+    <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
+      <h2 class="hope-title">心愿</h2>
+      <ul class=".am-list-stati">
+      <li>夜，宁静安详</li>
+      <li>风，轻拂脸上</li>
+      <li>望着刚刚划过的流星雨</li>
+      <li>小姑娘诉说着她的心愿</li>
+      <li>听，心愿说</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+// $(".get").css("background","url({{ static_url('i/background.jpg')  }}) no-repeat center")
+</script>
+{% end %}

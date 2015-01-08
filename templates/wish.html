@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="am-panel am-panel-primary">
+<strong class="am-text-primary am-text-lg">第{{ wishid }}个愿望</strong>
+<hr>
+<br>
+<p class="am-icon-user am-icon-md">发布者:{{ wish['user'] }}</p>
+<br>
+<p class="am-icon-clock-o am-icon-md">发布时间:{{ wish['time'] }}</p>
+<br>
+<p class="am-icon-star am-icon-md">心愿:
+{% for line in wish['wish'].split("\n") %}
+<p>{{ line }}</p>
+{% end %}
+</p>
+<br>
+<p class="am-icon-gift am-icon-md">报酬:{{ wish['reward'] }}</p>
+<br>
+<p class="am-icon-comments am-icon-md">联系方式:{{ wish['contact'] }}</p>
+<br>
+<i class="am-icon-spinner am-icon-spin am-icon-md"></i>进度:{{ wish['status'] }}
+</div>
+<div class="am-g  am-u-sm-centered">
+
+<a href="/pool"><button type="button" class="am-btn am-btn-primary am-round"><i class="am-icon-arrow-left"></i>返回</button></a>
+{% if user == wish['user'] %}
+<button type="button" id="complete" class="am-btn am-btn-success am-round"><i class="am-icon-check-square-o"></i>已达成</button>
+<button type="button" id="delete" class="am-btn am-btn-danger am-round"><i class="am-icon-trash"></i>删除</button>
+{% else %}
+<button type="button" id="join" class="am-btn am-btn-success am-round"><i class="am-icon-check-square-o"></i>果断支持</button>
+{% end %}
+
+<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="xinyuanshuo">
+  <div class="ds-thread"></div>
+</div>
+
+<script src="{{ static_url("js/wish.js") }}"></script>
+{% end %}

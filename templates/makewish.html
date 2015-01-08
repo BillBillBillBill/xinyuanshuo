@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ static_url("css/header.css") }}"/>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <hr>
+    <h1 class="header">许愿</h1>
+    <hr>
+    <br>
+    <br>
+    <form class="am-form am-form-horizontal">
+    <div class="am-form-group">
+      <label for="wish" class="am-u-sm-3 am-form-label">愿望 / Wish</label>
+        <div class="am-u-sm-9">
+          <textarea class="am-form-field" rows="5" id="wish" placeholder="据说真诚许愿就会实现哦"></textarea>
+            <small>许下你的愿望</small>
+        </div>
+    </div>
+
+    <div class="am-form-group">
+      <label for="reward" class="am-u-sm-3 am-form-label">报酬 / Reward</label>
+      <div class="am-u-sm-9">
+        <input type="text" id="reward" placeholder="可以为空滴">
+        <small>动力嘛(*^__^*)</small>
+      </div>
+    </div>
+
+    <div class="am-form-group">
+      <label for="contact" class="am-u-sm-3 am-form-label">联系方式 / Contact</label>
+      <div class="am-u-sm-9">
+        <input type="text" id="contact" placeholder="怎样可以找到你呢~">
+        <small></small>
+      </div>
+    </div>
+
+    <div class="am-form-group">
+      <div class="am-u-sm-9 am-u-sm-push-3">
+        <button type="button" id="sm" class="am-btn am-btn-primary"><i class="am-icon-gift"></i>许下愿望</button>
+      </div>
+    </div>
+  </form>
+    <hr>
+  </div>
+</div>
+
+
+<script src="{{ static_url("js/makewish.js") }}"></script>
+{% end %}

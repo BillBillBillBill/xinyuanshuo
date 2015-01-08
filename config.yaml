@@ -1,0 +1,6 @@
+name: xinyuanshuo
+version: 1
+worker: tornado
+handlers:
+- url: static/
+  static_path: files

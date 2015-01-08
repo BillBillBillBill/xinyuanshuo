@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="hope">
+  这是一个测试页面
+</div>
+
+<div class="am-u-sm-centered">
+<div class="am-u-sm-10 am-u-sm-centered">
+  <form class="am-form am-form-horizontal">
+    <div class="am-form-group">
+      <label for="user-intro" class="am-u-sm-3 am-form-label">mystery code</label>
+        <div class="am-u-sm-9">
+          <textarea class="am-form-field" rows="5" id="user-intro" placeholder="输入留言"></textarea>
+            <small>写下...</small>
+        </div>
+    </div>
+
+    <div class="am-form-group">
+      <div class="am-u-sm-9 am-u-sm-push-3">
+        <button type="button" class="am-btn am-btn-succes am-radius">发送</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+
+  <script type="text/javascript">
+  //向服务器post
+$(".am-btn.am-btn-primary").bind("click", function () {
+    if ($("#user-intro").val()) {
+        $.post("/test", {content: $("#user-intro").val()},
+            function (data) {
+              $("#user-intro").val(data);
+          });
+      } else {
+        alert("请输入后再提交..");
+      }
+    })
+
+  </script>
+
+{% end %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ static_url("css/header.css") }}"/>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <hr>
+    <h1 class="header">注册</h1>
+    <hr>
+    <br>
+    <br>
+    <form class="am-form">
+      <label for="username">用户名:</label>
+      <input type="text" name="username" id="username" value="">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" name="password" id="password" value="">
+      <br>
+      <br>
+      <div class="am-cf">
+        <button type="button" id="sm" class="am-btn am-btn-primary am-btn-sm am-fl">注 册</button>
+      </div>
+    </form>
+    <hr>
+  </div>
+</div>
+
+<script src="{{ static_url("js/signup.js") }}"></script>
+{% end %}

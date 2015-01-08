@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <script src="{{ static_url("js/jquery.min.js") }}"></script>
+  <script src="{{ static_url("js/amazeui.min.js") }}"></script>
+  <link rel="alternate icon" type="image/png" href="{{ static_url("i/favicon.png") }}">
+  <link rel="stylesheet" href="{{ static_url("css/amazeui.min.css") }}"/>
+  <link rel="stylesheet" href="{{ static_url("css/amaze.min.css") }}"/>
+  <link rel="stylesheet" href="{{ static_url("css/base.css") }}"/>
+</head>
+<body>
+<header class="am-topbar am-topbar-fixed-top am-topbar-inverse">
+  <div class="am-container">
+    <h1 class="am-topbar-brand">
+      <a href="http://xinyuanshuo.sinaapp.com"><span class="am-icon-btn am-primary am-icon-heart"></span>心愿说</a>
+    </h1>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
+            data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
+        class="am-icon-bars"></span></button>
+    <div class="am-collapse am-topbar-collapse" id="collapse-head">
+      <ul class="am-nav am-nav-pills am-topbar-nav">
+        <li><a href="/">首页</a></li>
+        <li><a href="/pool">心愿池</a></li>
+        <li><a href="/makewish">许愿</a></li>
+        <li class="am-dropdown" data-am-dropdown>
+          <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            菜单 <span class="am-icon-caret-down"></span>
+          </a>
+          <ul class="am-dropdown-content">
+<!--             <li class="am-dropdown-header">标题</li> -->
+            <li><a href="/me">个人中心</a></li>
+            <li><a href="/board">留言板</a></li>
+            <li><a href="/pickone">手气不错</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% if user == "" %}
+      <div class="am-topbar-right">
+        <a href="/signup">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+        </a>
+      </div>
+      <div class="am-topbar-right">
+        <a href="/login">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+        </a>
+      </div>
+      {% else %}
+      <div class="am-topbar-right hellomsg">
+        <a href="/me" class="hellomsg">
+        你好，
+        {% if user == None %}
+        陌生人
+        {% else %}
+        {{ user }}
+        {% end %}。
+        </a>
+      </div>
+      <div class="am-topbar-right">
+        {% if user == None %}
+        <a href="/login">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+        </a>
+        <a href="/signup">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+        </a>
+        {% else %}
+        <a href="/logout">
+        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-sign-out"></span> 退出</button>
+        </a>
+        {% end %}
+      </div>
+      {% end %}
+    </div>
+  </div>
+</header>
+
+{% block body %} {% end %}
+
+
+
+<footer class="footer">
+  <p>© 2014 <a href="http://www.yunshipei.com" target="_blank">AllMobilize, Inc.</a> Licensed under <a
+      href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by Bill.</p>
+    <p>
+      <span class="am-icon-qq"> QQ:536803427</span>
+      <span class="am-icon-weixin"> Wechat:billbill</span>
+    </p>
+</footer>
+
+<div class="amz-toolbar" id="amz-toolbar" style="right: 20px;">
+<a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+</div>
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="{{ static_url("js/polyfill/rem.min.js") }}"></script>
+<script src="{{ static_url("js/polyfill/respond.min.js") }}"></script>
+<script src="{{ static_url("js/amazeui.legacy.js") }}"></script>
+<![endif]-->
+
+
+</body>
+</html>

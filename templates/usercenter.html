@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block body %}
+<style>
+    .header {
+      text-align: center;
+    }
+</style>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+  <hr>
+  <h1 class="header">个人中心</h1>
+  <hr>
+  <br>
+  <div class="am-panel am-panel-secondary">
+    <div class="am-panel-hd">我的心愿</div>
+    <div class="am-panel-bd">
+    <ul class="am-list">
+
+
+    <li><div class="am-panel am-panel-secondary">
+    <div class="am-panel-hd">待实现的心愿</div>
+    <div class="am-panel-bd">
+    <ul class="am-list">
+    {% for wish in wishlist_need %}
+    <li><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"] }}</a></li>
+    {% end %}
+    </ul></div></div></li>
+
+    <li><div class="am-panel am-panel-primary">
+    <div class="am-panel-hd">实现中的心愿</div>
+    <div class="am-panel-bd">
+    <ul class="am-list">
+    {% for wish in wishlist_ing %}
+    <li><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"] }}</a></li>
+    {% end %}
+    </ul></div></div></li>
+
+    <li><div class="am-panel am-panel-success">
+    <div class="am-panel-hd">已实现的心愿</div>
+    <div class="am-panel-bd">
+    <ul class="am-list">
+    {% for wish in wishlist_finish %}
+    <li><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"] }}</a></li>
+    {% end %}
+    </ul></div></div></li>
+
+    <li><div class="am-u-sm-centered"><a href="/makewish">还没有许愿?来许一个愿吧</a></div></li>
+    </ul>
+
+    </div>
+  </div>
+  <div class="am-panel am-panel-secondary">
+    <div class="am-panel-hd">帮助他人的心愿</div>
+    <div class="am-panel-bd">
+    <ul class="am-list">
+    {% for wish in helpwl %}
+    <li><a href="/wish/{{ wish['ID'] }}">{{ wish["wish"] }}</a></li>
+    {% end %}
+    </ul>
+    </div>
+  </div>
+</div>
+</div>
+{% end %}
