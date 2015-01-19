@@ -30,6 +30,9 @@ class WishHandler(BaseHandler):
                 self.write("成功删除")
             elif optype == "complete":
                 assert user == wl[0]['user']
+                if wl[0]['status'][0] == u'已':
+                    self.write("已成功完成!")
+                    return
                 helpuser = "by"+wl[0]['status'][:-4] if len(wl[0]['status'])!=3 else ""
                 querysql = u"UPDATE `wish` SET `status` = '已完成%s' WHERE `ID` = '%s'" % (helpuser,wishid)
                 execute_sql(querysql)
